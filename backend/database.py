@@ -1,25 +1,47 @@
 '''
-the db will be local (Serverless)
-it literally would be better if the stuff was stored in a server but whtever
-We are using SQLite if we want to switch to SQL then cool ig.
+you gotta install sqlalchemy guys
+
+this class handles all the database stuff
 '''
 
-import sqlite3
-from collections import namedtuple
+import sqlalchemy as db
+from sqlalchemy.orm import Session
+from datamodels import Base, Report, User
 
 class DB:
     
     def __init__(self):
-        self.conn = sqlite3.connect('backend/bug_database.db')
-        self.cursor = self.conn.cursor()
+        self.engine = db.create_engine('sqlite:///backend/bug_database.db')
 
-    def add_bug(self, bug):
-        # bug is a Report object
-        pass
+        Base.metadata.create_all(self.engine)
 
-    def rem_bug(self, bug_name):
-        # tries to remove bug with its name
+        self.session = Session(bind=self.engine)
+
+    def add_bug(self, report: Report):
+        self.session.add(report)
+        self.session.commit()
+
+    def rem_bug(self, bug_name: str):
+        report = self.session.query(Report).filter_by(name=bug_name).first()
+
+        if report:
+            self.session.delete(report)
+            self.session.commit()
+
+    def rem_bug_id(self, id: int):
+        report = self.session.query(Report).filter_by(id=id).first()
+
+        if report:
+            self.session.delete(report)
+            self.session.commit()
+
+    def get_all_reports(self):
+        return self.session.query(Report).all()
+
+    def clear_report_table(self):
+        # be careful, this legit just clears the report table
+        # not implemented
         pass
 
     def close(self): #handles closing of connection
-        self.cursor.close()
+        self.session.close()

@@ -11,3 +11,6 @@ venv/
 
 #database
 bug_database.db
+
+#testing
+test.py
