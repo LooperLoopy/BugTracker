@@ -1,3 +1,8 @@
+'''
+These are the db schemas
+yea
+'''
+
 import sqlalchemy as db
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -13,7 +18,8 @@ class Report(Base):
     author = db.Column(db.String, nullable=True)
     date_added = db.Column(db.String, nullable=True)
 
-class User():
+# Put the Base table as the base when ready to use.
+class User(): # <-- make it class User(Base)
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
