@@ -1,6 +1,6 @@
 from ..datamodels import Report
 
-def create_report(report_create):
+def create_report(report_create, db):
     new_report = Report(
         name = report_create.name,
         description = report_create.description,
@@ -8,5 +8,7 @@ def create_report(report_create):
         author = report_create.author,
         completed = report_create.completed
     )
-    #TODO: add to db logic
+    db.add(new_report)
+    db.commit()
+    db.refres(new_report)
     return new_report
