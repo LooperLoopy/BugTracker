@@ -10,5 +10,5 @@ def create_report(report_create, db):
     )
     db.add(new_report)
     db.commit()
-    db.refres(new_report)
+    db.refresh(new_report)
     return new_report
