@@ -1,28 +1,3 @@
-'''
-Yay!!!
-don't you love OOP
-
-we also need FastAPI
-'''
-
-from database import DB
-from datamodels import Report, User
-
-database = DB()
-
-# How to use!
-
-report_to_add = Report(name="test", description="test description", importance=0)
-# database.add_bug(report_to_add)
-# database.rem_bug("test")
-
-results = database.get_all_reports()
-
-for report in results:
-    print(f"ID: {report.id}, Name: {report.name}, Description: {report.description}, Importance: {report.importance}")
-
-database.close()
-
 # Setup:
 cd into the backend
 python -m venv venv
@@ -30,3 +5,34 @@ pip install -r requirements.txt
 
 # Running the server:
 uvicorn main:app
+
+# Architecture
+Scenario: User requests to create a new report
+```text
+User Request
+  │  (Get request, so tells us to use GET route)
+  ▼
+Route
+  │  (Validates report fields, create DB session, pass both to service function)
+  ▼
+Service
+  │  (Saves report to database)
+  ▼
+Database
+```
+```text
+BugTracker/
+└─ backend/
+   ├─ main.py
+   ├─ Datamodels.py
+   ├─ Database.py
+   ├─ routes/
+   ├─ services/
+   └─ schemas/
+```
+- `main.py` — Starts the FastAPI server  
+- `Datamodels.py` — Defines schema for DB tables  
+- `Database.py` — Instantiates DB connection and provides getter for sessions  
+- `routes/` — Endpoints for different user requests  
+- `services/` — Business logic functions  
+- `schemas/` — Pydantic models for request/response validation
