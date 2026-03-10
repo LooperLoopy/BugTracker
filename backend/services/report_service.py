@@ -1,9 +1,5 @@
 '''
-We will unit test the functions in here, passing a fake db.
-
-see the cool thing is that these functions don't care
-
-what db they are passed. 
+Functions that actually interact with dependencies (like db)
 '''
 
 from ..datamodels import Report
