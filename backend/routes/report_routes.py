@@ -1,15 +1,9 @@
 '''
 routes for handling report operations
 
-notice how we dependency inject the db/session into the handler
+to test, we can override Depends(get_db) with a temporary db
 
-this is going to help us when we create unit tests for use cases
-
-and we don't want to use a real db!!! we can use a mock
-
-db service which is faster and standard practice for unit tests
-
-router gives real db to service, but unit test file will give fake db to service
+so it doesn't affect real db
 '''
 
 from fastAPI import APIRouter, Depends
