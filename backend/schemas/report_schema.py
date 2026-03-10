@@ -6,6 +6,7 @@ class ReportBase(BaseModel):
     name: str
     description: str
     importance: int
+    completed: bool = False
 
 class ReportCreate(ReportBase):
     pass

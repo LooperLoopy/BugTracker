@@ -20,6 +20,7 @@ class Report(Base):
     importance = db.Column(db.Integer, nullable=False)
     author = db.Column(db.String, nullable=True)
     date_added = db.Column(DateTime, default = datetime.utcnow)
+    completed = db.Column(db.Boolean, default=False)
 
 # Put the Base table as the base when ready to use.
 class User(): # <-- make it class User(Base)

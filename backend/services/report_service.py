@@ -6,6 +6,7 @@ def create_report(report_create):
         description = report_create.description,
         importance = report_create.importance,
         author = report_create.author,
+        completed = report_create.completed
     )
     #TODO: add to db logic
     return new_report
