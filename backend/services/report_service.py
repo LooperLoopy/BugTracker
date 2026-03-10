@@ -1,3 +1,11 @@
+'''
+We will unit test the functions in here, passing a fake db.
+
+see the cool thing is that these functions don't care
+
+what db they are passed. 
+'''
+
 from ..datamodels import Report
 
 def create_report(report_create, db):
