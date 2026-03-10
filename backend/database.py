@@ -45,3 +45,4 @@ class DB:
 
     def close(self): #handles closing of connection
         self.session.close()
+db_instance = DB() #initialize db instance then pass to main

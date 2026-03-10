@@ -3,6 +3,9 @@ These are the db schemas
 yea
 '''
 
+import datetime
+from xmlrpc.client import DateTime
+
 import sqlalchemy as db
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -16,7 +19,7 @@ class Report(Base):
     description = db.Column(db.String, nullable=False)
     importance = db.Column(db.Integer, nullable=False)
     author = db.Column(db.String, nullable=True)
-    date_added = db.Column(db.String, nullable=True)
+    date_added = db.Column(DateTime, default = datetime.utcnow)
 
 # Put the Base table as the base when ready to use.
 class User(): # <-- make it class User(Base)

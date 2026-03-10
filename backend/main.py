@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from .database import db_instance
 
 app = FastAPI()
 

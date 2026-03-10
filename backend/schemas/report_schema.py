@@ -1,3 +1,5 @@
+import datetime
+
 from pydantic import BaseModel
 
 class ReportBase(BaseModel):
@@ -9,5 +11,7 @@ class ReportCreate(ReportBase):
     pass
 class ReportResponse(ReportBase):
     id: int
-    author: str
-    date_added: str
+    date_added: datetime
+
+    class Config:
+        from_attributes = True
