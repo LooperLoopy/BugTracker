@@ -2,10 +2,15 @@
 you gotta install sqlalchemy guys
 
 this class handles all the database stuff
+
+Ideally, we should instantiate this class one time for the server 
+so that we only have one engine. However we need multiple sessions
+instead of just one. Each user request will get their own session
+so that they don't interfere. Implemented using a session factory aka sessionmaker
 '''
 
 import sqlalchemy as db
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, sessionmaker
 from datamodels import Base, Report, User
 
 class DB:
@@ -16,7 +21,11 @@ class DB:
         Base.metadata.create_all(self.engine)
 
         self.session = Session(bind=self.engine)
-
+        #Initialize session factory
+        self.session_factory = sessionmaker(bind=self.engine)
+    #Call on the session factory to generate and return a session.
+    def create_session(self):
+        return self.session_factory()
     def add_bug(self, report: Report):
         self.session.add(report)
         self.session.commit()
@@ -45,4 +54,10 @@ class DB:
 
     def close(self): #handles closing of connection
         self.session.close()
-db_instance = DB() #initialize db instance then pass to main
+db_instance = DB() #initialize db instance for server
+def get_db():
+    session = db_instance.create_session()
+    try:
+        yield session
+    finally:
+        session.close()
