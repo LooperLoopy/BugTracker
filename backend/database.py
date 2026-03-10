@@ -54,9 +54,11 @@ class DB:
 
     def close(self): #handles closing of connection
         self.session.close()
-db_instance = DB() #initialize db instance for server
+db_instance = DB() #instantiate db class
+#Getter to create a unique session for each request
 def get_db():
-    session = db_instance.create_session()
+    session = db_instance.create_session() #new session
+    #close session for request when done
     try:
         yield session
     finally:
