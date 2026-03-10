@@ -1,11 +1,13 @@
 # Setup:
+```text
 cd into the backend
 python -m venv venv
 pip install -r requirements.txt
-
+```
 # Running the server:
+```text
 uvicorn main:app
-
+```
 # Architecture
 Scenario: User requests to create a new report
 ```text
