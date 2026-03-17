@@ -1,11 +1,24 @@
-# Setup:
+## Setup:
+# create virtual environment
 ```text
 cd into the backend
 python -m venv venv
-pip install -r requirements.txt
-create and populate env file with your stuff
-DATABASE_URL = "database-url-string-here"
 ```
+# activate venv
+**On macOS / Linux**
+```text
+source venv/bin/activate
+```
+**on windows**
+```text
+venv\Scripts\activate
+```
+# install dependencies into venv
+```text
+pip install -r requirements.txt
+```
+# create an env file (for dependencies) if you want
+DATABASE_URL = "database-url-string-here"
 # Running the server:
 ```text
 uvicorn main:app
