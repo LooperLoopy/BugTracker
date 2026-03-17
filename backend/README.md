@@ -13,12 +13,10 @@ source venv/bin/activate
 ```text
 venv\Scripts\activate
 ```
-# install dependencies into venv
+# install requirements into venv
 ```text
 pip install -r requirements.txt
 ```
-# create an env file (for dependencies) if you want
-DATABASE_URL = "database-url-string-here"
 # Running the server:
 ```text
 uvicorn main:app
