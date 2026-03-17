@@ -3,6 +3,8 @@
 cd into the backend
 python -m venv venv
 pip install -r requirements.txt
+create and populate env file with your stuff
+DATABASE_URL = "database-url-string-here"
 ```
 # Running the server:
 ```text
