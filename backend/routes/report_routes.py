@@ -11,7 +11,8 @@ from ..services.report_service import create_report
 from ..schemas import ReportCreate, ReportResponse
 from ..database import get_db
 from sqlalchemy.orm import Session
-router = APIRouter(prefix="/reports")
+
+report_router = APIRouter(prefix="/reports")
 
 @router.post("/create", response_model=ReportResponse)
 async def create_report(report_create: ReportCreate, db: Session = Depends(get_db)):
