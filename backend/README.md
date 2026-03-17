@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ```
 # Running the server:
 ```text
-uvicorn main:app
+uvicorn app.main:app
 ```
 # Architecture
 Scenario: User requests to create a new report
