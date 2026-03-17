@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from backend.database.database import db_instance
-from backend.routes.report_routes import report_router
-from backend.routes.user_routes import user_router
+from app.database.database import db_instance
+from app.routes.report_routes import router as report_router
+from app.routes.user_routes import router as user_router
 
 app = FastAPI()
 

@@ -2,7 +2,7 @@
 Functions that actually interact with dependencies (like db)
 '''
 
-from ..datamodels import Report
+from app.database.datamodels import Report
 
 def create_report(report_create, db):
     new_report = Report(

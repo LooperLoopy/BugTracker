@@ -1,4 +1,4 @@
-
+from app.schemas.user_schema import UserLogin, UserSignUp
 def signup(user_data: UserSignUp, db):
     #1. Query db to check if user/email exists
 

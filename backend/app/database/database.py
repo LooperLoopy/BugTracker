@@ -11,12 +11,12 @@ so that they don't interfere. Implemented using a session factory aka sessionmak
 
 import sqlalchemy as db
 from sqlalchemy.orm import Session, sessionmaker
-from datamodels import Base, Report, User
+from .datamodels import Base, Report, User
 
 class DB:
     
     def __init__(self):
-        self.engine = db.create_engine('sqlite:///backend/bug_database.db')
+        self.engine = db.create_engine('sqlite:///bug_database.db')
 
         Base.metadata.create_all(self.engine)
 
