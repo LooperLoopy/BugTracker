@@ -10,6 +10,7 @@ class ReportBase(BaseModel):
 
 class ReportCreate(ReportBase):
     pass
+
 class ReportResponse(ReportBase):
     id: int
     date_added: datetime

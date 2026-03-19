@@ -16,3 +16,14 @@ def create_report(report_create, db):
     db.commit()
     db.refresh(new_report)
     return new_report
+
+def get_reports(db):
+    return db.query(Report).all()
+
+def get_report(report_id, db):
+    return db.query(Report).filter(Report.id == report_id).first()
+
+def remove_report(report_id, db):
+    rows_deleted = db.query(Report).filter(Report.id == report_id).delete()
+    db.commit()
+    return rows_deleted
