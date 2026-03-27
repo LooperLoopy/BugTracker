@@ -10,15 +10,17 @@ from fastapi import APIRouter, Depends, HTTPException
 import app.services.report_service as report_service
 from app.schemas.report_schema import ReportCreate, ReportResponse
 from app.database.database import get_db
+from app.database.models import User
 from sqlalchemy.orm import Session
+from app.auth.access_token import get_current_user
 
 router = APIRouter(prefix="/reports")
 
 # Create Report
 @router.post("/create", response_model=ReportResponse)
-async def create_report(report_create: ReportCreate, db: Session = Depends(get_db)):
+async def create_report(report_create: ReportCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     try:
-        new_report = report_service.create_report(report_create, db)
+        new_report = report_service.create_report(report_create, db, current_user.id)
         return new_report
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
