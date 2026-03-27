@@ -1,6 +1,6 @@
 from app.schemas.user_schema import UserLogin, UserSignUp, UserInfo, UserResponse
 from app.auth.access_token import create_access_token
-from app.auth.security import get_hash_password
+from app.auth.security import get_hash_password, verify_password
 from app.database.datamodels import User
 from fastapi import HTTPException
 def signup(user_data: UserSignUp, db):
@@ -39,4 +39,27 @@ def signup(user_data: UserSignUp, db):
         )   
     )
 def login(user_data: UserLogin, db):
-    pass
+    #1. Verify email / username exists (save to a user object)
+    user = db.query(User).filter(
+        (User.email == user_data.login) | (User.username == user_data.login)
+    ).first()
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid Credentials")
+    #2. Compare password with db password
+    if not verify_password(user_data.password, user.hashed_password):
+        raise HTTPException(status_code=401, detail="InvalidCredentials")
+    #3. create jwt
+    access_token = create_access_token(
+        {
+            "sub": str(user.id)
+        }
+    )
+    return UserResponse(
+        access_token = access_token,
+        token_type = "bearer",
+        user = UserInfo(
+            username = user.username,
+            email = user.email,
+            id = user.id
+        )   
+    )
