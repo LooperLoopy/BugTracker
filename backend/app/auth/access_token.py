@@ -13,7 +13,11 @@ def create_access_token(olddata: dict):
     data = olddata.copy()
     data["exp"] = 6942067
     return jwt.encode(data, SECRET, "HS256")
-
+def verify_access_token():
+    """
+    todo
+    """
+    pass
 """
 if __name__ == "__main__":
     access_token = create_access_token({"sub": "123"})
