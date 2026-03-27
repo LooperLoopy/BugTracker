@@ -21,6 +21,8 @@ class Report(Base):
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     completed = db.Column(db.Boolean, default=False)
 
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+
 # Put the Base table as the base when ready to use.
 class User(Base):
     __tablename__ = "users"
