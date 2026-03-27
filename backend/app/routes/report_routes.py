@@ -17,19 +17,28 @@ router = APIRouter(prefix="/reports")
 # Create Report
 @router.post("/create", response_model=ReportResponse)
 async def create_report(report_create: ReportCreate, db: Session = Depends(get_db)):
-    new_report = report_service.create_report(report_create, db)
-    return new_report
+    try:
+        new_report = report_service.create_report(report_create, db)
+        return new_report
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Get All Reports
 @router.get("/", response_model=list[ReportResponse])
 async def get_reports(db: Session = Depends(get_db)):
-    reports = report_service.get_reports(db)
-    return reports
+    try:
+        reports = report_service.get_reports(db)
+        return reports
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Get Specific Report
 @router.get("/{report_id}", response_model=ReportResponse)
 async def get_report(report_id: int, db: Session = Depends(get_db)):
-    report = report_service.get_report(report_id, db)
+    try:
+        report = report_service.get_report(report_id, db)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
     if report is None:
         # do something idk
@@ -40,7 +49,10 @@ async def get_report(report_id: int, db: Session = Depends(get_db)):
 # Delete Specific Report
 @router.delete("/{report_id}")
 async def delete_report(report_id: int, db: Session = Depends(get_db)):
-    deleted = report_service.remove_report(report_id, db)
+    try:
+        deleted = report_service.remove_report(report_id, db)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
     if deleted == 0:
         raise HTTPException(status_code=404, detail="Report not found")
