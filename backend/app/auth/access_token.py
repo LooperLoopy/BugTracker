@@ -6,8 +6,9 @@ SECRET = "looooongsecretttjdsahposaiodsaoudsaoi2918321873721398hjhjshjshdjsa"
 
 def create_access_token(olddata: dict):
     """
-    Receive a dictionary with user id or anything else we wanna put in jwt
-    payload, encode the jwt then return it as jwt string
+    Input: a string-string dictionary with user id or anything else we wanna put in jwt
+    payload
+    Return: jwt token string
     """
     data = olddata.copy()
     data["exp"] = 6942067

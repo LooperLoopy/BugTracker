@@ -21,4 +21,3 @@ class UserResponse(BaseModel):
     user: UserInfo
     access_token: str
     token_type: str
-    

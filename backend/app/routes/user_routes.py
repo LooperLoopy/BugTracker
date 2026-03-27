@@ -6,7 +6,13 @@ from app.services.user_service import login, signup
 
 router = APIRouter(prefix="/user")
 
-@router.post("/signup", response_model = UserResponse)
+@router.post(
+    "/signup",
+    response_model=UserResponse,
+    responses={
+        409: {"description": "Email or username already exists. Simply display the field called detail"}
+    }
+)
 async def signup(user_data: UserSignUp, db: Session = Depends(get_db)):
     result = signup(user_data, db)
     return result
