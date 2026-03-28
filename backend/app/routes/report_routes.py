@@ -10,7 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException
 import app.services.report_service as report_service
 from app.schemas.report_schema import ReportCreate, ReportResponse, ReportResponseList
 from app.database.database import get_db
-from app.database.models import User
+from app.database.datamodels import User
 from sqlalchemy.orm import Session
 from app.auth.access_token import get_current_user
 

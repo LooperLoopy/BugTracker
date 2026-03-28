@@ -12,7 +12,7 @@ class ReportCreate(ReportBase):
     author: str
     author_id: int
     description: str
-    created_at: datetime.utcnow
+    created_at: datetime
 
 class ReportResponse(ReportBase):
     description: str
