@@ -8,7 +8,7 @@ so it doesn't affect real db
 
 from fastapi import APIRouter, Depends, HTTPException
 import app.services.report_service as report_service
-from app.schemas.report_schema import ReportCreate, ReportResponse, ReportResponseList
+from app.schemas.report_schema import ReportCreate, ReportResponse, ReportResponseList, ReportUpdate
 from app.database.database import get_db
 from app.database.datamodels import User
 from sqlalchemy.orm import Session
@@ -60,6 +60,18 @@ async def delete_report(report_id: int, db: Session = Depends(get_db), current_u
         raise HTTPException(status_code=404, detail="Report not found")
 
     return {"message": "Report deleted"}
+# Update Specific Report
+@router.put("/{report_id}", response_model = ReportResponse)
+async def update_report(report_id: int, report_update: ReportUpdate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
+    try:
+        updated_report = report_service.update_report(report_id=report_id, updated_report=report_update, db=db, user_id=current_user.id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    if updated_report == 0:
+        raise HTTPException(status_code=404, detail="Report not found")
+
+    return updated_report
 
 # Edit
 # Relieve

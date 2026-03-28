@@ -3,8 +3,9 @@ Functions that actually interact with dependencies (like db)
 '''
 
 from app.database.datamodels import Report
+from app.schemas.report_schema import ReportCreate, ReportUpdate
 
-def create_report(report_create, db, user_id):
+def create_report(report_create: ReportCreate, db, user_id):
     new_report = Report(
         name = report_create.name,
         description = report_create.description,
@@ -28,3 +29,9 @@ def remove_report(report_id, db, user_id):
     rows_deleted = db.query(Report).filter(Report.id == report_id, Report.author_id == user_id).delete()
     db.commit()
     return rows_deleted
+
+def update_report(report_id, updated_report: ReportUpdate, db, user_id):
+    report_query = db.query(Report).filter(Report.id == report_id, Report.author_id == user_id)
+    report_query.update(updated_report.model_dump(exclude_unset=True))
+    db.commit()
+    return report_query.first()
