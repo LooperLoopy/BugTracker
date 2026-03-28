@@ -11,7 +11,7 @@ def create_report(report_create: ReportCreate, db, user_id):
         description = report_create.description,
         importance = report_create.importance,
         author = report_create.author,
-        completed = report_create.completed,
+        status = report_create.status,
         author_id = user_id
     )
     db.add(new_report)
