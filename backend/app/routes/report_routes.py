@@ -8,7 +8,7 @@ so it doesn't affect real db
 
 from fastapi import APIRouter, Depends, HTTPException
 import app.services.report_service as report_service
-from app.schemas.report_schema import ReportCreate, ReportResponse
+from app.schemas.report_schema import ReportCreate, ReportResponse, ReportResponseList
 from app.database.database import get_db
 from app.database.models import User
 from sqlalchemy.orm import Session
@@ -26,7 +26,7 @@ async def create_report(report_create: ReportCreate, db: Session = Depends(get_d
         raise HTTPException(status_code=500, detail=str(e))
 
 # Get All Reports
-@router.get("/", response_model=list[ReportResponse])
+@router.get("/", response_model=list[ReportResponseList])
 async def get_reports(db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     try:
         reports = report_service.get_reports(db, current_user.id)
