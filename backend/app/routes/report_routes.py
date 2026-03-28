@@ -27,18 +27,18 @@ async def create_report(report_create: ReportCreate, db: Session = Depends(get_d
 
 # Get All Reports
 @router.get("/", response_model=list[ReportResponse])
-async def get_reports(db: Session = Depends(get_db)):
+async def get_reports(db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     try:
-        reports = report_service.get_reports(db)
+        reports = report_service.get_reports(db, current_user.id)
         return reports
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 # Get Specific Report
 @router.get("/{report_id}", response_model=ReportResponse)
-async def get_report(report_id: int, db: Session = Depends(get_db)):
+async def get_report(report_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     try:
-        report = report_service.get_report(report_id, db)
+        report = report_service.get_report(report_id, db, current_user.id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -50,9 +50,9 @@ async def get_report(report_id: int, db: Session = Depends(get_db)):
 
 # Delete Specific Report
 @router.delete("/{report_id}")
-async def delete_report(report_id: int, db: Session = Depends(get_db)):
+async def delete_report(report_id: int, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     try:
-        deleted = report_service.remove_report(report_id, db)
+        deleted = report_service.remove_report(report_id, db, current_user.id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
