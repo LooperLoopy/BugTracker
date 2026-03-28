@@ -1,0 +1,1 @@
+// When we click on a card this is the part that opens up
