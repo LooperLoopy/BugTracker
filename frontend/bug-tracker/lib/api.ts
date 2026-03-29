@@ -3,7 +3,7 @@ const BASE_URL = "http://localhost:8000"
 
 // Get SINGLE report
 export async function getReport(id: number){
-    const token = localStorage.getItem("token") //get the token
+    const token = localStorage.getItem("access_token") //get the token
 
     const res = await fetch(`${BASE_URL}/reports/${id}`,{
         headers: {Authorization: `Bearer ${token}`} //passing the token idk
@@ -15,7 +15,7 @@ export async function getReport(id: number){
 
 // Get ALL REPORTS!!
 export async function getReports() {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("access_token");
 
   const res = await fetch(`${BASE_URL}/reports/`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -32,7 +32,7 @@ export async function createReport(report: {
   importance?: number;
   status?: string;
 }) {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("access_token");
 
   const res = await fetch(`${BASE_URL}/reports/create`, {
     method: "POST",
@@ -55,7 +55,7 @@ export async function updateReport(report: {
     importance?: number;
     status?: string;
 }) {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("access_token");
 
     const id = report.id;
 
