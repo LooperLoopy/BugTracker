@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 class ReportCreate(BaseModel):
     name: str
-    author: str | None = None
     description: str
     importance: int = 0
     status: CompletionStatus = CompletionStatus.NOT_STARTED
@@ -14,7 +13,7 @@ class ReportUpdate(BaseModel):
     description: str | None = None
     importance: int | None = None
     status: bool | None = None
-    
+
 class ReportResponse(BaseModel):
     name: str
     id: int
@@ -23,7 +22,6 @@ class ReportResponse(BaseModel):
     date_added: datetime
     importance: int
     status: CompletionStatus
-    author: str
 
     class Config:
         from_attributes = True

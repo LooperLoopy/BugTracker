@@ -10,7 +10,6 @@ def create_report(report_create: ReportCreate, db, user_id):
         name = report_create.name,
         description = report_create.description,
         importance = report_create.importance,
-        author = report_create.author,
         status = report_create.status,
         author_id = user_id
     )
