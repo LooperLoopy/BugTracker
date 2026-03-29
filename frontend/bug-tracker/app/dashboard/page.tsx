@@ -2,7 +2,7 @@
 import {CreateReportData} from "@/lib/types"
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { getReport, getReports, createReport, updateReport } from "@/lib/api"; // should i be importing one by one... lol
+import { getReport, getReports, createReport, updateReport, deleteReport } from "@/lib/api"; // should i be importing one by one... lol
 import { useState, useEffect } from "react";
 import Column from "@/components/BoardColumn";
 import CreateReportModal from "@/components/CreateReportModal";
@@ -53,6 +53,12 @@ export default function Home() {
     fetchReports();
   }
 
+  async function handleDelete(id: number){
+    deleteReport(id)
+
+    fetchReports();
+  }
+
   async function moveReport(id: number, status: string) {
     await updateReport({id, status});
 
@@ -74,21 +80,25 @@ export default function Home() {
           title="Not Started"
           reports={notStarted}
           onMove={moveReport}
+          onDelete={handleDelete}
         />
         <Column
           title="In Progress"
           reports={inProgress}
           onMove={moveReport}
+          onDelete={handleDelete}
         />
         <Column
           title="Testing"
           reports={testing}
           onMove={moveReport}
+          onDelete={handleDelete}
         />
         <Column
           title="Completed"
           reports={completed}
           onMove={moveReport}
+          onDelete={handleDelete}
         />
         <button className="bg-white text-black text-2xl cursor-pointer px-2 py-2 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report</button>
           {showCreateForm && <CreateReportModal onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}

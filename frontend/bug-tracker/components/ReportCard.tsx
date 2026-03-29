@@ -3,11 +3,13 @@ type ReportCardProps = {
 
     report: Report
     onMove: (id: number, newStatus: string) => void;
+    onDelete: (id: number) => void;
+
 }
-export default function ReportCard({report, onMove}: ReportCardProps){
+export default function ReportCard({report, onMove, onDelete}: ReportCardProps){
     return(
         <div className="flex flex-col bg-gray-500">
-            <button className="border self-end m-2 cursor-pointer">delete</button>
+            <button className="border self-end m-2 cursor-pointer" onClick={()=>onDelete(report.id)}>delete</button>
             <strong>{`Name: ${report.name || "null"}`}</strong>
             <p>{`Description: ${report.description}`}</p>
             <div>
