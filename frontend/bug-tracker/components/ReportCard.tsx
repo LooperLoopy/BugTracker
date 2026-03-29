@@ -7,6 +7,7 @@ type ReportCardProps = {
 export default function ReportCard({report, onMove}: ReportCardProps){
     return(
         <div className="flex flex-col bg-gray-500">
+            <button className="border self-end m-2 cursor-pointer">delete</button>
             <strong>{`Name: ${report.name || "null"}`}</strong>
             <p>{`Description: ${report.description}`}</p>
             <div>

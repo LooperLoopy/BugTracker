@@ -73,3 +73,15 @@ export async function updateReport(report: {
 }
 
 // TODO: delete report...
+
+export async function deleteReport(id: number){
+    const token = localStorage.getItem("access_token");
+
+    const res = await fetch(`${BASE_URL}/reports/${id}`,{
+      method: "DELETE",
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+    })
+    if (!res.ok) throw new Error("Failed to delete report")
+}
