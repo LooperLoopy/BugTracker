@@ -60,6 +60,7 @@ async def delete_report(report_id: int, db: Session = Depends(get_db), current_u
         raise HTTPException(status_code=404, detail="Report not found")
 
     return {"message": "Report deleted"}
+
 # Update Specific Report
 @router.put("/{report_id}", response_model = ReportResponse)
 async def update_report(report_id: int, report_update: ReportUpdate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):

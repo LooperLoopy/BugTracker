@@ -6,14 +6,15 @@ class ReportCreate(BaseModel):
     name: str
     author: str | None = None
     description: str
-    importance: int
-    status: CompletionStatus
+    importance: int = 0
+    status: CompletionStatus = CompletionStatus.NOT_STARTED
 
 class ReportUpdate(BaseModel):
     name: str | None = None
     description: str | None = None
     importance: int | None = None
     status: bool | None = None
+    
 class ReportResponse(BaseModel):
     name: str
     id: int
