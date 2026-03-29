@@ -37,6 +37,7 @@ export default function Home() {
   async function fetchReports() {
     try {
       const data = await getReports();
+      console.log(data)
       setReports(data);
     } catch (error: any) {
       console.error("An error occurred:", error.message);
@@ -44,7 +45,6 @@ export default function Home() {
   }
 
   async function handleCreate(data: CreateReportData) {
-    console.log(data)
     const created_report = await createReport(
     data
     );
@@ -66,10 +66,10 @@ export default function Home() {
 
   // html starts here ///////////////////////////////////////////////////////////////////////////////////
   return (
-    <div>
-      <h1>Reports</h1>
+    <div className="flex flex-col items-center justify-center ">
+      <h1 className="text-4xl">Reports</h1>
 
-      <div style={{ display: "flex", gap: 20 }}>
+      <div className=""style={{ display: "flex", gap: 20 }}>
         <Column
           title="Not Started"
           reports={notStarted}
@@ -90,7 +90,7 @@ export default function Home() {
           reports={completed}
           onMove={moveReport}
         />
-        <button className="bg-white text-black text-2xl cursor-pointer px-2 py-2" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report</button>
+        <button className="bg-white text-black text-2xl cursor-pointer px-2 py-2 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report</button>
           {showCreateForm && <CreateReportModal onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
       </div>
     </div>

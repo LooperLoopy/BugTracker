@@ -8,7 +8,7 @@ type column = {
 
 export default function Column({title, reports, onMove} : column){
     return (
-    <div style={{ width: 300 }}>
+    <div className="flex flex-col gap-3"style={{ width: 300 }}>
       <h2>{title}</h2>
 
       {reports.map((report) => (

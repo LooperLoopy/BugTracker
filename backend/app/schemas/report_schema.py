@@ -31,6 +31,7 @@ class ReportResponseList(BaseModel):
     id: int
     description: str
     importance: int
+    status: CompletionStatus
     class Config:
         from_attributes = True
     pass
