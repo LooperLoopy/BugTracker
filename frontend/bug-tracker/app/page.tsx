@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { getReport, getReports, createReport } from "@/lib/api"; // should i be importing one by one... lol
+import { getReport, getReports, createReport, updateReport } from "@/lib/api"; // should i be importing one by one... lol
 import { useState, useEffect } from "react";
+import Column from "@/components/BoardColumn";
 
 export default function Home() {
   const { id } = useParams();
@@ -60,17 +61,44 @@ export default function Home() {
     fetchReports();
   }
 
+  async function moveReport(id: number, status: string) {
+    await updateReport({id, status});
+
+    fetchReports();
+  }
+
+  const notStarted = reports.filter(r => r.status === "not_started");
+  const inProgress = reports.filter(r => r.status === "in_progress");
+  const testing = reports.filter(r => r.status === "testing");
+  const completed = reports.filter(r => r.status === "completed");
+
   // html starts here ///////////////////////////////////////////////////////////////////////////////////
   return (
     <div>
       <h1>Reports</h1>
 
-      {reports.map((r) => (
-        <div key={r.id}>
-          <h2>{r.name}</h2>
-          <p>{r.description}</p>
-        </div>
-      ))}
+      <div style={{ display: "flex", gap: 20 }}>
+        <Column
+          title="Not Started"
+          reports={notStarted}
+          onMove={moveReport}
+        />
+        <Column
+          title="In Progress"
+          reports={inProgress}
+          onMove={moveReport}
+        />
+        <Column
+          title="Testing"
+          reports={testing}
+          onMove={moveReport}
+        />
+        <Column
+          title="Completed"
+          reports={completed}
+          onMove={moveReport}
+        />
+      </div>
     </div>
-  ); // yea this just pumps out an error because the database is empty..
+  ); // yea this just pumps out an error because the database is empty.. AND we unauthorized
 }

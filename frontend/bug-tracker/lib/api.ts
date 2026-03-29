@@ -17,7 +17,7 @@ export async function getReport(id: number){
 export async function getReports() {
   const token = localStorage.getItem("token");
 
-  const res = await fetch(`${BASE_URL}/reports`, {
+  const res = await fetch(`${BASE_URL}/reports/`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -37,15 +37,39 @@ export async function createReport(report: {
   const res = await fetch(`${BASE_URL}/reports/create`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(report),
   });
 
   if (!res.ok) throw new Error("Failed to create report");
-
   return res.json();
 }
 
-// TODO: delete report, update report...
+// Update a report!
+export async function updateReport(report: {
+    id: number;
+    name?: string;
+    description?: string;
+    importance?: number;
+    status?: string;
+}) {
+    const token = localStorage.getItem("token");
+
+    const id = report.id;
+
+    const res = await fetch(`${BASE_URL}/reports/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(report),
+    });
+
+    if (!res.ok) throw new Error("Failed to update report");
+    return res.json();
+}
+
+// TODO: delete report...
