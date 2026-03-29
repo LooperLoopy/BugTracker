@@ -12,7 +12,7 @@ class ReportUpdate(BaseModel):
     name: str | None = None
     description: str | None = None
     importance: int | None = None
-    status: bool | None = None
+    status: CompletionStatus
 
 class ReportResponse(BaseModel):
     name: str

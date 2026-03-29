@@ -5,7 +5,6 @@ type ReportCardProps = {
     onMove: (id: number, newStatus: string) => void;
 }
 export default function ReportCard({report, onMove}: ReportCardProps){
-    console.log(report)
     return(
         <div className="flex flex-col bg-gray-500">
             <strong>{`Name: ${report.name || "null"}`}</strong>
