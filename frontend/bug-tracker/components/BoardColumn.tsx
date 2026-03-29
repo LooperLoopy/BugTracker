@@ -1,5 +1,5 @@
 import { Report } from "@/lib/types";
-
+import ReportCard from "@/components/ReportCard"
 type column = {
     title: string;
     reports: Report[];
@@ -12,31 +12,7 @@ export default function Column({title, reports, onMove} : column){
       <h2>{title}</h2>
 
       {reports.map((report) => (
-        <div
-          key={report.id}
-          style={{
-            border: "1px solid black",
-            padding: 10,
-            marginBottom: 10,
-          }}
-        >
-          <strong>{report.name}</strong>
-          <p>{report.description}</p>
-
-          {/* Move buttons (temp)*/}
-          <button onClick={() => onMove(report.id, "not_started")}>
-            Not Started
-          </button>
-          <button onClick={() => onMove(report.id, "in_progress")}>
-            In Progress
-          </button>
-          <button onClick={() => onMove(report.id, "testing")}>
-            Testing
-          </button>
-          <button onClick={() => onMove(report.id, "completed")}>
-            Done
-          </button>
-        </div>
+        <ReportCard key ={report.id} report={report} onMove={onMove}/>
       ))}
     </div>
   );
