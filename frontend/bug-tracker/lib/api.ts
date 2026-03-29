@@ -28,7 +28,6 @@ export async function getReports() {
 // Create a report!!!!!!
 export async function createReport(report: {
   name: string;
-  author?: string; // i think the author should be handled differently.
   description: string;
   importance?: number;
   status?: string;

@@ -12,7 +12,6 @@ export default function Home() {
 
   // For report form
   const [name, setName] = useState("");
-  const [author, setAuthor] = useState(""); // TODO: yo how is the author handled pls help
   const [description, setDescription] = useState("");
   const [importance, setImportance] = useState<number | undefined>(); // when undefined it sets a default value specified in report_schema
   const [status, setStatus] = useState<string | undefined>();
@@ -54,7 +53,6 @@ export default function Home() {
 
     // reset
     setName("");
-    setAuthor(""); // TODO: idek what to with with the author stuff......
     setDescription("");
     setImportance(undefined);
     setStatus(undefined);

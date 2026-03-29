@@ -25,7 +25,6 @@ class Report(Base):
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     importance = db.Column(db.Integer, nullable=False)
-    author = db.Column(db.String, nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     status  = db.Column(SAEnum(CompletionStatus, name="completion_status"), default=CompletionStatus.NOT_STARTED)
 
