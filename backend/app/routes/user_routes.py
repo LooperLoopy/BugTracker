@@ -2,7 +2,7 @@ from fastapi import Depends, APIRouter
 from app.schemas.user_schema import UserLogin, UserResponse, UserSignUp
 from app.database.database import get_db
 from sqlalchemy.orm import Session
-from app.services.user_service import login, signup
+import app.services.user_service as user_service
 
 router = APIRouter(prefix="/user")
 
@@ -14,10 +14,10 @@ router = APIRouter(prefix="/user")
     }
 )
 async def signup(user_data: UserSignUp, db: Session = Depends(get_db)):
-    result = signup(user_data, db)
+    result = user_service.signup(user_data, db)
     return result
 
 @router.post("/login", response_model = UserResponse)
 async def login(user_data: UserLogin, db: Session = Depends(get_db)):
-    result = login(user_data, db)
+    result = user_service.login(user_data, db)
     return result

@@ -38,5 +38,5 @@ class User(Base):
     username = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     hashed_password = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.Date, nullable=False)
-    updated_at = db.Column(db.Date, nullable=False)
+    created_at = db.Column(db.Date, default=datetime.now(timezone.utc), nullable=False)
+    updated_at = db.Column(db.Date, default=datetime.now(timezone.utc), nullable=False)

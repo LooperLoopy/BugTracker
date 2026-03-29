@@ -4,6 +4,7 @@ from fastapi.security import OAuth2PasswordBearer
 from app.database.datamodels import User
 from app.database.database import get_db
 from sqlalchemy.orm import Session
+import time
 """
 create and verify jwt
 """
@@ -17,14 +18,14 @@ def create_access_token(olddata: dict):
     Return: jwt token string
     """
     data = olddata.copy()
-    data["exp"] = 6942067
+    data["exp"] = int(time.time()) + 3600
     return jwt.encode(data, SECRET, "HS256")
 def verify_access_token(token: str = Depends(oauth2_scheme)):
     """
     extract token and validate
     """
     try:
-        payload = jwt.decode(token, SECRET, ["HS256"])
+        payload = jwt.decode(token, SECRET, algorithms=["HS256"])
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token expired")
     except jwt.InvalidTokenError:
