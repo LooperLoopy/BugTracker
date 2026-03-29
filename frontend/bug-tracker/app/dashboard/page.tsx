@@ -1,21 +1,20 @@
 "use client";
-
+import {CreateReportData} from "@/lib/types"
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { getReport, getReports, createReport, updateReport } from "@/lib/api"; // should i be importing one by one... lol
 import { useState, useEffect } from "react";
 import Column from "@/components/BoardColumn";
+import CreateReportModal from "@/components/CreateReportModal";
+
 
 export default function Home() {
   const { id } = useParams();
   const [reports, setReports] = useState<any[]>([]);
   const [report, setReport] = useState<any>(null);
+  const[showCreateForm, toggleCreateForm] = useState(false);
 
-  // For report form
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [importance, setImportance] = useState<number | undefined>(); // when undefined it sets a default value specified in report_schema
-  const [status, setStatus] = useState<string | undefined>();
+
 
   // useEffect(() => {
   //   if (!id) return;
@@ -44,19 +43,12 @@ export default function Home() {
     }
   }
 
-  async function handleCreate() {
-    await createReport({
-      name,
-      description,
-      ...(importance !== undefined && { importance }),
-      ...(status && { status }),
-    });
-
-    // reset
-    setName("");
-    setDescription("");
-    setImportance(undefined);
-    setStatus(undefined);
+  async function handleCreate(data: CreateReportData) {
+    console.log(data)
+    const created_report = await createReport(
+    data
+    );
+    console.log(created_report)
 
     fetchReports();
   }
@@ -98,6 +90,8 @@ export default function Home() {
           reports={completed}
           onMove={moveReport}
         />
+        <button className="bg-white text-black text-2xl cursor-pointer px-2 py-2" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report</button>
+          {showCreateForm && <CreateReportModal onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
       </div>
     </div>
   ); // yea this just pumps out an error because the database is empty.. AND we unauthorized

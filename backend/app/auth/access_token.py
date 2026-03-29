@@ -18,7 +18,7 @@ def create_access_token(olddata: dict):
     Return: jwt token string
     """
     data = olddata.copy()
-    data["exp"] = int(time.time()) + 3600
+    data["exp"] = int(time.time()) + 3600 * 5
     return jwt.encode(data, SECRET, "HS256")
 def verify_access_token(token: str = Depends(oauth2_scheme)):
     """
