@@ -15,10 +15,8 @@ export async function signup(email: string, username: string, password: string){
 
 
     })
-    const data = await res.json()
-    localStorage.setItem("token",data.access_token)
     if (!res.ok) throw new Error("Login failed")
-    return data
+    return res.json()
 }
 
 export async function login(login: string, password: string){
@@ -32,8 +30,6 @@ export async function login(login: string, password: string){
             password: password
             })
     })
-    const data = await res.json()
-    localStorage.setItem("token",data.access_token)
     if (!res.ok) throw new Error("Login failed")
-    return data
+    return res.json()
 }
