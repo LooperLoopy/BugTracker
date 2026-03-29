@@ -1,4 +1,3 @@
-import { stringify } from "querystring"
 
 //Functions like signup / login and token stuff
 const BASE_URL = "http://localhost:8000"
@@ -16,8 +15,10 @@ export async function signup(email: string, username: string, password: string){
 
 
     })
-    if (!res.ok) throw new Error("Signup failed")
-    return res.json()
+    const data = await res.json()
+    localStorage.setItem("token",data.access_token)
+    if (!res.ok) throw new Error("Login failed")
+    return data
 }
 
 export async function login(login: string, password: string){
@@ -31,6 +32,8 @@ export async function login(login: string, password: string){
             password: password
             })
     })
+    const data = await res.json()
+    localStorage.setItem("token",data.access_token)
     if (!res.ok) throw new Error("Login failed")
-    return res.json()
+    return data
 }
