@@ -1,5 +1,5 @@
 "use client";
-import {CreateReportData} from "@/lib/types"
+import {ReportData} from "@/lib/types"
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { getReport, getReports, createReport, updateReport, deleteReport } from "@/lib/api"; // should i be importing one by one... lol
@@ -44,11 +44,27 @@ export default function Home() {
     }
   }
 
-  async function handleCreate(data: CreateReportData) {
+  async function handleCreate(data: ReportData) {
     const created_report = await createReport(
     data
     );
     console.log(created_report)
+
+    fetchReports();
+  }
+
+  async function handleEdit(data: ReportData) {
+    if (data.id == undefined){
+      return;
+    }
+
+    const id = data.id || 0;
+    const name = data.name;
+    const description = data.description;
+    const importance = data.importance;
+    const status = data.status;
+
+    await updateReport({id, name, description, importance, status});
 
     fetchReports();
   }
@@ -70,6 +86,8 @@ export default function Home() {
   const testing = reports.filter(r => r.status === "testing");
   const completed = reports.filter(r => r.status === "completed");
 
+  const empty: ReportData = {name: "", description: ""};
+
   // html starts here ///////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="flex flex-col items-center justify-center ">
@@ -81,27 +99,31 @@ export default function Home() {
           reports={notStarted}
           onMove={moveReport}
           onDelete={handleDelete}
+          onEdit={handleEdit}
         />
         <Column
           title="In Progress"
           reports={inProgress}
           onMove={moveReport}
           onDelete={handleDelete}
+          onEdit={handleEdit}
         />
         <Column
           title="Testing"
           reports={testing}
           onMove={moveReport}
           onDelete={handleDelete}
+          onEdit={handleEdit}
         />
         <Column
           title="Completed"
           reports={completed}
           onMove={moveReport}
           onDelete={handleDelete}
+          onEdit={handleEdit}
         />
         <button className="bg-white text-black text-2xl cursor-pointer px-2 py-2 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report</button>
-          {showCreateForm && <CreateReportModal onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
+          {showCreateForm && <CreateReportModal header="Create Report" intialData={empty} onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
       </div>
     </div>
   ); // yea this just pumps out an error because the database is empty.. AND we unauthorized

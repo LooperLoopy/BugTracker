@@ -1,4 +1,4 @@
-import { Report } from "@/lib/types"
+import { Report, ReportData } from "@/lib/types"
 import ReportModal from "@/components/ReportModal";
 import { useState } from "react";
 type ReportCardProps = {
@@ -6,9 +6,9 @@ type ReportCardProps = {
     report: Report
     onMove: (id: number, newStatus: string) => void;
     onDelete: (id: number) => void;
-
+    onEdit: (data: ReportData) => void;
 }
-export default function ReportCard({report, onMove, onDelete}: ReportCardProps){
+export default function ReportCard({report, onMove, onDelete, onEdit}: ReportCardProps){
     const[showReport, toggleReportView] = useState(false);
 
     return(
@@ -16,7 +16,7 @@ export default function ReportCard({report, onMove, onDelete}: ReportCardProps){
             className="flex flex-col rounded bg-gray-500"
             onClick={() => toggleReportView(true)}
         >
-            <ReportModal report={report} isOpen={showReport} onRequestClose={() => toggleReportView(false)}/>
+            <ReportModal report={report} isOpen={showReport} onRequestClose={() => toggleReportView(false)} onEdit={onEdit}/>
 
             <div
                 onClick={e => e.stopPropagation()}
@@ -25,7 +25,7 @@ export default function ReportCard({report, onMove, onDelete}: ReportCardProps){
             </div>
             
                 <strong>{`Name: ${report.name || "null"}`}</strong>
-                <p>{`Description: ${report.description}`}</p>
+                <p>{`Priority: ${report.importance}`}</p>
 
             <div onClick={e => e.stopPropagation()}>
                 <select

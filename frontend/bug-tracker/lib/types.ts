@@ -23,7 +23,8 @@ export type UserResponse = {
     token_type: string
 }
 
-export type CreateReportData = {
+export type ReportData = {
+    id?: number
     name: string
     description: string
     importance?: number
