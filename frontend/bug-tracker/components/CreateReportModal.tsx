@@ -18,7 +18,7 @@ export default function CreateReportModal({header, intialData, onClose, onCreate
     return(
     <div className="fixed inset-0 flex justify-center items-center">
  
-        <div className="flex flex-col gap-2 bg-white text-black w-full max-w-md p-8">            
+        <div className="flex flex-col gap-2 bg-surface w-full max-w-md p-8">            
             <h1 className="text-3xl">{header}</h1>
             <p>Name:</p>
             <input className="border"type="text" value = {name} placeholder={intialData.name} onChange={(e)=>setName(e.target.value)}/>

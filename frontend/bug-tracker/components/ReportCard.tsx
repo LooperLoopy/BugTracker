@@ -13,18 +13,18 @@ export default function ReportCard({report, onMove, onDelete, onEdit}: ReportCar
 
     return(
         <div 
-            className="flex flex-col rounded bg-gray-500"
+            className="border-t-4 p-2 relative bg-surface flex flex-col rounded bg-gray-500"
             onClick={() => toggleReportView(true)}
         >
             <ReportModal report={report} isOpen={showReport} onRequestClose={() => toggleReportView(false)} onEdit={onEdit}/>
 
-            <div
+            <div className="absolute top-0 right-0"
                 onClick={e => e.stopPropagation()}
             >
-                <button className="border self-end m-2 cursor-pointer" onClick={()=>onDelete(report.id)}>delete</button>
+                <button className="border m-2 cursor-pointer" onClick={()=>onDelete(report.id)}>delete</button>
             </div>
             
-                <strong>{`Name: ${report.name || "null"}`}</strong>
+                <strong>{`${report.name || "null"}`}</strong>
                 <p>{`Priority: ${report.importance}`}</p>
 
             <div onClick={e => e.stopPropagation()}>

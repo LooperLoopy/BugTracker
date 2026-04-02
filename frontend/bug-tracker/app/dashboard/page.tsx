@@ -122,7 +122,11 @@ export default function Home() {
           onDelete={handleDelete}
           onEdit={handleEdit}
         />
-        <button className="bg-white text-black text-2xl cursor-pointer px-2 py-2 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report</button>
+        <button className="bg-surface text-2xl cursor-pointer px-2 py-2 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report
+
+
+
+        </button>
           {showCreateForm && <CreateReportModal header="Create Report" intialData={empty} onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
       </div>
     </div>
