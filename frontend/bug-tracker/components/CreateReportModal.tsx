@@ -16,7 +16,7 @@ export default function CreateReportModal({header, intialData, onClose, onCreate
     const [status, setStatus] = useState(intialData.status);
     
     return(
-    <div className="fixed inset-0 flex justify-center items-center">
+    <div className="bg-surface fixed inset-0 flex justify-center items-center">
  
         <div className="flex flex-col gap-2 bg-surface w-full max-w-md p-8">            
             <h1 className="text-3xl">{header}</h1>

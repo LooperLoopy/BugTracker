@@ -6,14 +6,12 @@ import { getReport, getReports, createReport, updateReport, deleteReport } from 
 import { useState, useEffect } from "react";
 import Column from "@/components/BoardColumn";
 import CreateReportModal from "@/components/CreateReportModal";
-
-
+import {CirclePlus, CircleX, Search} from "lucide-react";
 export default function Home() {
   const { id } = useParams();
   const [reports, setReports] = useState<any[]>([]);
   const [report, setReport] = useState<any>(null);
   const[showCreateForm, toggleCreateForm] = useState(false);
-
 
 
   // useEffect(() => {
@@ -90,10 +88,22 @@ export default function Home() {
 
   // html starts here ///////////////////////////////////////////////////////////////////////////////////
   return (
-    <div className="flex flex-col items-center justify-center ">
-      <h1 className="text-4xl">Reports</h1>
+    <div className="flex flex-col items-center justify-center h-screen ">
+              <h1 className="self-start text-5xl font-bold m-5 ">Bug Report Tracker</h1>
 
-      <div className=""style={{ display: "flex", gap: 20 }}>
+      <div id="header"className="mb-5 flex flex-row justify-between w-90/100">
+      <div className="rounded-sm bg-surface border-1 pl-10 flex flex-row ">
+                  <Search></Search>
+        <input id="search" className="bg-surface pl-10 " type="text" placeholder="Search.."></input>
+          <CircleX></CircleX>
+      </div>
+        <button className=" flex flex-row items-center gap-3 rounded-sm border-1 bg-surface text-2xl cursor-pointer px-5 py-1 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report
+          <CirclePlus className="w-7 h-7"></CirclePlus>
+        </button>      
+        </div>
+
+
+      <div className="bg-surface w-full justify-center flex-1 flex overflow-hidden"style={{ display: "flex", gap: 20 }}>
         <Column
           title="Not Started"
           reports={notStarted}
@@ -122,11 +132,7 @@ export default function Home() {
           onDelete={handleDelete}
           onEdit={handleEdit}
         />
-        <button className="bg-surface text-2xl cursor-pointer px-2 py-2 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report
 
-
-
-        </button>
           {showCreateForm && <CreateReportModal header="Create Report" intialData={empty} onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
       </div>
     </div>

@@ -19,13 +19,15 @@ export default function ReportModal({report, isOpen, onRequestClose, onEdit}: Re
 
     return (
         <div 
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 "
             onClick={e => { e.stopPropagation(); onRequestClose(); }}
         >
             <div 
-                className="bg-white rounded-lg p-6 flex flex-col gap-2 min-w-[300px]"
+                className="bg-surface rounded-lg p-6 flex flex-col w-70/100 overflow-y-auto max-h-[80vh]"
                 onClick={e => e.stopPropagation()}
             >
+                                <div className="text-4xl sticky top-0 bg-surface border-b flex justify-between">
+                <strong className="">{`${report.name || "null"}`}</strong>
                 <button 
                     className="self-end text-gray-500 hover:text-black cursor-pointer"
                     onClick={onRequestClose}
@@ -33,8 +35,13 @@ export default function ReportModal({report, isOpen, onRequestClose, onEdit}: Re
                     X
                 </button>
 
-                <strong>{`Name: ${report.name || "null"}`}</strong>
-                <p>{`Description: ${report.description}`}</p>
+                </div>
+
+                <p >Description:</p>
+                <div className="max-h[20vh]">
+                <p className="">{`${report.description}`}</p>
+                
+                </div>
                 
                 <button 
                     className="border self-end m-2 cursor-pointer"
