@@ -1,5 +1,6 @@
 import { Report, ReportData } from "@/lib/types";
 import ReportCard from "@/components/ReportCard"
+import { useState, useEffect } from "react";
 type column = {
     title: string;
     reports: Report[];
@@ -8,9 +9,58 @@ type column = {
     onEdit: (data: ReportData) => void;
 }
 
+enum sortKey {
+  Name_AZ = "NAMEAZ",
+  Name_ZA = "NAMEZA",
+  Priority_HIGH = "PRIHIGH",
+  Priority_LOW = "PRILOW",
+  Date_RECENT = "DATEREC",
+  Date_OLD = "DATEOLD",
+}
+
 export default function Column({title, reports, onMove, onDelete, onEdit} : column){
-    async function changeSort(sortType:string) {
-      return;
+    const [sortValue, setSortValue] = useState(sortKey.Name_AZ);
+    const [ref_reports, setReports] = useState<any[]>(reports);
+
+    useEffect(() => {
+      setReports(reports);
+      reports.map((report) => (
+        console.log(report.date_added)
+      ));
+      changeSort(sortValue);
+    }, [reports]);
+
+    async function changeSort(sortType: sortKey) {
+      setSortValue(sortType);
+
+      let sortBy;
+
+      switch (sortType) {
+        case sortKey.Name_AZ:
+          sortBy = (a: Report, b: Report) => a.name.localeCompare(b.name);
+          break;
+        case sortKey.Name_ZA:
+          sortBy = (a: Report, b: Report) => b.name.localeCompare(a.name);
+          break;
+        case sortKey.Priority_HIGH:
+          sortBy = (a: Report, b: Report) => b.importance - a.importance;
+          break;
+        case sortKey.Priority_LOW:
+          sortBy = (a: Report, b: Report) => a.importance - b.importance;
+          break;
+        case sortKey.Date_RECENT:
+          sortBy = (a: Report, b: Report) =>
+            new Date(b.date_added).getTime() - new Date(a.date_added).getTime();
+          break;
+        case sortKey.Date_OLD:
+          sortBy = (a: Report, b: Report) =>
+            new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
+          break;
+        default:
+          sortBy = (a: Report, b: Report) => a.name.localeCompare(b.name);
+      }
+
+      setReports(prev => [...prev].sort(sortBy));
     }
 
     return (
@@ -19,16 +69,17 @@ export default function Column({title, reports, onMove, onDelete, onEdit} : colu
       <h2>{title}</h2>
       </div>
       <p>Sort By: </p>
-            <select value={""} onChange={e => changeSort(e.target.value)} className="border p-2 w-full rounded">
-                <option className="text-black" value="Name">Name</option>
-                <option className="text-black" value="Priority">Priority</option>
-                <option className="text-black" value="Date Added">Date Added</option>
-                <option className="text-black" value="Descending">Descending</option>
-                <option className="text-black" value="Ascending">Ascending</option>
+            <select value={sortValue} onChange={e => changeSort(e.target.value as sortKey)} className="border p-2 w-full rounded">
+                <option className="text-black" value={sortKey.Name_AZ}>Name A-Z</option>
+                <option className="text-black" value={sortKey.Name_ZA}>Name Z-A</option>
+                <option className="text-black" value={sortKey.Priority_HIGH}>Highest Priority</option>
+                <option className="text-black" value={sortKey.Priority_LOW}>Lowest Priority</option>
+                <option className="text-black" value={sortKey.Date_RECENT}>Recent</option>
+                <option className="text-black" value={sortKey.Date_OLD}>Oldest</option>
             </select>
 
       <div className="mt-2 flex flex-col gap-3 overflow-y-auto max-h-[80vh]" style={{ width: 250 }}>
-        {reports.map((report) => (
+        {ref_reports.map((report) => (
           <ReportCard key ={report.id} report={report} onMove={onMove} onDelete={onDelete} onEdit={onEdit}/>
         ))}
       </div>
