@@ -18,20 +18,22 @@ export default function ReportCard({report, onMove, onDelete, onEdit}: ReportCar
         >
             <ReportModal report={report} isOpen={showReport} onRequestClose={() => toggleReportView(false)} onEdit={onEdit}/>
 
-            <div className="absolute top-0 right-0"
+            {/**<div className="absolute top-0 right-0"
                 onClick={e => e.stopPropagation()}
             >
                 <button className="border m-2 cursor-pointer" onClick={()=>onDelete(report.id)}>delete</button>
-            </div>
-            
+            </div>**/}
+                <div className="flex flex-row justify-between mb-3">
                 <strong>{`${report.name || "null"}`}</strong>
-                <p>{`Priority: ${report.importance}`}</p>
+                <p>{`P${report.importance}`}</p>
+                </div>
 
-            <div onClick={e => e.stopPropagation()}>
+
+            <div className="w-fit bg-white px-1 py-[1px] rounded-md"onClick={e => e.stopPropagation()}>
                 <select
                     value={report.status}
                     onChange={e => onMove(report.id, e.target.value)}
-                    className="border p-1 rounded text-black bg-white"
+                    className="p-1 rounded-md bg-surface text-xs"
                 >
                     <option value="not_started">Not Started</option>
                     <option value="in_progress">In Progress</option>

@@ -93,15 +93,15 @@ export default function Home() {
     <div className="flex flex-col h-screen bg-surface">
       <div id="REAL-header" className="w-full bg-background flex justify-center mb-3">
 
-      <div id="parent-header"className="w-95/100 mt-10 mb-10 bg-background">
+      <div id="parent-header"className="w-95/100 mt-10 mb-5 bg-background">
 
-             <h1 className="self-start text-5xl font-bold">Bug Report Tracker</h1>
+             <h1 className="self-start text-4xl font-bold">Bug Report Tracker</h1>
 
       <div id="header"className="flex flex-row justify-between w-full">
       <div className="flex flex-col">
       <div id="searchbar" className="mt-auto rounded-md bg-surface border-1 flex flex-row items-center gap-3 px-3">
                   <Search className="w-7 h-7"></Search>
-        <input value={searchText} onChange={(e)=>setSearchText(e.target.value)}id="search" className="max-w-40 text-2xl py-2 outline-none bg-surface " type="text" placeholder="Search.."></input>
+        <input value={searchText} onChange={(e)=>setSearchText(e.target.value)}id="search" className="max-w-40 text-xl py-2 outline-none bg-surface " type="text" placeholder="Search.."></input>
           <CircleX
             className={`${searchText.trim() === "" ? "invisible" : ""}`}
             onClick={(e)=>setSearchText("")}
@@ -109,8 +109,8 @@ export default function Home() {
           </div>
       </div>
 
-        <button className=" flex flex-row items-center gap-3 rounded-md border-1 bg-surface text-3xl cursor-pointer px-5 py-3 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report
-          <CirclePlus className="w-12 h-12"></CirclePlus>
+        <button className=" flex flex-row items-center gap-3 rounded-md border-1 bg-surface text-2xl cursor-pointer px-5 py-3" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report
+          <CirclePlus className="w-10 h-10"></CirclePlus>
         </button>      
         </div>
       </div>

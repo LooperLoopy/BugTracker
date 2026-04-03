@@ -65,12 +65,12 @@ export default function Column({title, reports, onMove, onDelete, onEdit} : colu
 
     return (
     <div className="bg-background">
-      <div id="column-header" className="gap-3 flex flex-row">
+      <div id="column-header" className="gap-3 flex flex-row items-start">
           <div className="p-1 border text-center bg-surface">
             <h2>{title}</h2>
           </div>
-          <div className="p-1 border bg-surface">count</div>
-            <select value={sortValue} onChange={e => changeSort(e.target.value as sortKey)} className="border p-2 bg-surface text-white w-full rounded">
+          <div className="p-1 border bg-surface text-[0.6rem]">{reports.length}</div>
+            <select value={sortValue} onChange={e => changeSort(e.target.value as sortKey)} className="border p-2 bg-surface text-white max-w-28 text-[0.55rem] rounded">
                 <option className="text-white" value={sortKey.Name_AZ}>Name A-Z</option>
                 <option className="text-white" value={sortKey.Name_ZA}>Name Z-A</option>
                 <option className="text-white" value={sortKey.Priority_HIGH}>Highest Priority</option>
@@ -82,7 +82,7 @@ export default function Column({title, reports, onMove, onDelete, onEdit} : colu
 
 
 
-      <div className="mt-2 flex flex-col gap-2 overflow-y-auto max-h-[80vh] p-2" style={{ width: 250 }}>
+      <div className="flex flex-col overflow-y-auto max-h-[80vh] p-2 gap-2 bg-background mt-2" >
         {ref_reports.map((report) => (
           <ReportCard key ={report.id} report={report} onMove={onMove} onDelete={onDelete} onEdit={onEdit}/>
         ))}
