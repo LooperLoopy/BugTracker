@@ -1,12 +1,14 @@
 import { Report, ReportData } from "@/lib/types";
 import ReportCard from "@/components/ReportCard"
 import { useState, useEffect } from "react";
+import {Circle} from "lucide-react";
 type column = {
     title: string;
     reports: Report[];
     onMove: (id: number, newStatus: string) => void;
     onDelete: (id: number) => void;
     onEdit: (data: ReportData) => void;
+    colour: string;
 }
 
 enum sortKey {
@@ -18,7 +20,7 @@ enum sortKey {
   Date_OLD = "DATEOLD",
 }
 
-export default function Column({title, reports, onMove, onDelete, onEdit} : column){
+export default function Column({title, reports, onMove, onDelete, onEdit, colour} : column){
     const [sortValue, setSortValue] = useState(sortKey.Name_AZ);
     const [ref_reports, setReports] = useState<any[]>(reports);
 
@@ -66,8 +68,10 @@ export default function Column({title, reports, onMove, onDelete, onEdit} : colu
     return (
     <div className="bg-background h-98/100">
       <div id="column-header" className="gap-3 flex flex-row items-start mt-3">
-          <div className="p-1 border text-center bg-surface">
+          <div className="p-1 border text-center bg-surface flex flex-row gap-2">
+            <Circle style={{color: colour}}/>
             <h2>{title}</h2>
+
           </div>
           <div className="p-1 border bg-surface text-[0.6rem]">{reports.length}</div>
             <select value={sortValue} onChange={e => changeSort(e.target.value as sortKey)} className="border p-2 bg-surface text-white max-w-28 text-[0.55rem] rounded">
@@ -84,7 +88,7 @@ export default function Column({title, reports, onMove, onDelete, onEdit} : colu
 
       <div className="flex flex-col overflow-y-auto max-h-[80vh] p-2 gap-2 bg-background mt-2" >
         {ref_reports.map((report) => (
-          <ReportCard key ={report.id} report={report} onMove={onMove} onDelete={onDelete} onEdit={onEdit}/>
+          <ReportCard key ={report.id} report={report} onMove={onMove} onDelete={onDelete} onEdit={onEdit} colour={colour}/>
         ))}
       </div>
 

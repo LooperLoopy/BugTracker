@@ -128,6 +128,7 @@ export default function Home() {
           onMove={moveReport}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          colour={"#972f2f"}
         />
         <Column
           title="In Progress"
@@ -135,6 +136,7 @@ export default function Home() {
           onMove={moveReport}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          colour={"#d38166"}
         />
         <Column
           title="Testing"
@@ -142,6 +144,7 @@ export default function Home() {
           onMove={moveReport}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          colour={"#f4e29b"}
         />
         <Column
           title="Completed"
@@ -149,6 +152,7 @@ export default function Home() {
           onMove={moveReport}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          colour={"#75be76"}
         />
 
           {showCreateForm && <CreateReportModal header="Create a Report" intialData={empty} onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
