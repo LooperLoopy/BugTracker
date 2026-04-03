@@ -12,6 +12,8 @@ export default function Home() {
   const [reports, setReports] = useState<any[]>([]);
   const [report, setReport] = useState<any>(null);
   const[showCreateForm, toggleCreateForm] = useState(false);
+  const [showSearchX, toggleSearchX] = useState(false);
+  const[searchText, setSearchText] = useState("");
 
 
   // useEffect(() => {
@@ -92,11 +94,14 @@ export default function Home() {
               <h1 className="self-start text-5xl font-bold m-5 ">Bug Report Tracker</h1>
 
       <div id="header"className="mb-5 flex flex-row justify-between w-90/100">
-      <div className="rounded-sm bg-surface border-1 pl-10 flex flex-row ">
-                  <Search></Search>
-        <input id="search" className="bg-surface pl-10 " type="text" placeholder="Search.."></input>
-          <CircleX></CircleX>
-      </div>
+      <div id="searchbar" className="rounded-sm bg-surface border-1 flex flex-row items-center gap-3 px-3">
+                  <Search className="w-7 h-7"></Search>
+        <input value={searchText} onChange={(e)=>setSearchText(e.target.value)}id="search" className="outline-none bg-surface " type="text" placeholder="Search.."></input>
+          <CircleX
+            className={`${searchText.trim() === "" ? "invisible" : ""}`}
+            onClick={(e)=>setSearchText("")}
+          />      
+          </div>
         <button className=" flex flex-row items-center gap-3 rounded-sm border-1 bg-surface text-2xl cursor-pointer px-5 py-1 h-max" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report
           <CirclePlus className="w-7 h-7"></CirclePlus>
         </button>      
