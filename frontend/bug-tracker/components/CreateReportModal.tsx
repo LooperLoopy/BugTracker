@@ -1,4 +1,5 @@
 import {useState} from "react"
+import {X} from "lucide-react"
 import {ReportData, CompletionStatus} from "@/lib/types"
 type CreateReportModalProps = {
     header: string;
@@ -16,9 +17,9 @@ export default function CreateReportModal({header, intialData, onClose, onCreate
     const [status, setStatus] = useState(intialData.status);
     
     return(
-    <div className="bg-surface fixed inset-0 flex justify-center items-center">
+    <div className="bg-black/50 fixed inset-0 flex justify-center items-center">
  
-        <div className="flex flex-col gap-2 bg-surface w-full max-w-md p-8">            
+        <div className="flex flex-col gap-2 bg-surface w-full max-w-md p-8 relative">            
             <h1 className="text-3xl">{header}</h1>
             <p>Name:</p>
             <input className="border"type="text" value = {name} placeholder={intialData.name} onChange={(e)=>setName(e.target.value)}/>
@@ -39,8 +40,9 @@ export default function CreateReportModal({header, intialData, onClose, onCreate
                 <option value="completed">Completed</option>
             </select>            
             <button className=" text-xl border mb-2 cursor-pointer" onClick={()=>{onCreate({id, name, importance, description, status}); onClose()}}>Submit</button>
-            <button className=" text-xl border cursor-pointer self-end"onClick={onClose}>Close this thingy</button>
+            <button className=" text-xl cursor-pointer self-end absolute" onClick={onClose}><X strokeWidth={2.5} /></button>
         </div>
+        
     </div>
     )
 }

@@ -3,6 +3,7 @@
 import { Report, ReportData } from "@/lib/types"
 import { useState } from "react"
 import CreateReportModal from "./CreateReportModal"
+import {X} from "lucide-react"
 
 type ReportModalProps = {
     report: Report
@@ -23,16 +24,16 @@ export default function ReportModal({report, isOpen, onRequestClose, onEdit}: Re
             onClick={e => { e.stopPropagation(); onRequestClose(); }}
         >
             <div 
-                className="bg-surface rounded-lg p-6 flex flex-col w-70/100 overflow-y-auto max-h-[80vh]"
+                className="relative bg-surface rounded-lg p-6 flex flex-col w-70/100 overflow-y-auto max-h-[80vh]"
                 onClick={e => e.stopPropagation()}
             >
-                                <div className="text-4xl sticky top-0 bg-surface border-b flex justify-between">
+                                <div className="text-4xl sticky top-0 bg-surface border-b flex justify-between ">
                 <strong className="">{`${report.name || "null"}`}</strong>
                 <button 
-                    className="self-end text-gray-500 hover:text-black cursor-pointer"
+                    className="top-0 text-gray-500 hover:text-black cursor-pointer h-fit"
                     onClick={onRequestClose}
                 >
-                    X
+                    <X className="h-8 w-8"strokeWidth={2.5} />
                 </button>
 
                 </div>
