@@ -64,8 +64,8 @@ export default function Column({title, reports, onMove, onDelete, onEdit} : colu
     }
 
     return (
-    <div className="bg-background">
-      <div id="column-header" className="gap-3 flex flex-row items-start">
+    <div className="bg-background h-98/100">
+      <div id="column-header" className="gap-3 flex flex-row items-start mt-3">
           <div className="p-1 border text-center bg-surface">
             <h2>{title}</h2>
           </div>

@@ -151,7 +151,7 @@ export default function Home() {
           onEdit={handleEdit}
         />
 
-          {showCreateForm && <CreateReportModal header="Create Report" intialData={empty} onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
+          {showCreateForm && <CreateReportModal header="Create a Report" intialData={empty} onClose={()=>toggleCreateForm(false)} onCreate={handleCreate}/>}
       </div>
     </div>
   ); // yea this just pumps out an error because the database is empty.. AND we unauthorized

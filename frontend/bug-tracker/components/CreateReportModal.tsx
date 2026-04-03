@@ -27,20 +27,25 @@ export default function CreateReportModal({header, intialData, onClose, onCreate
             <input className="border" type="text" value = {description} placeholder={intialData.description} onChange={(e)=>setDescription(e.target.value)} />
             <p>Importance: </p>
             <select value={importance ?? ""} onChange={e => setImportance(Number(e.target.value))} className="border p-2 w-full rounded">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option className="text-black"value="0">0</option>
+                <option className="text-black"value="1">1</option>
+                <option className="text-black"value="2">2</option>
+                <option className="text-black"value="3">3</option>
             </select>    
             <p>Status: </p>
             <select value={status ?? ""} onChange={e => setStatus(e.target.value as CompletionStatus)} className="border p-2 w-full rounded">
-                <option value="not_started">Not Started</option>
-                <option value="in_progress">In Progress</option>
-                <option value="testing">Testing</option>
-                <option value="completed">Completed</option>
+                <option className="text-black" value="not_started">Not Started</option>
+                <option className="text-black"value="in_progress">In Progress</option>
+                <option className="text-black"value="testing">Testing</option>
+                <option className="text-black"value="completed">Completed</option>
             </select>            
             <button className=" text-xl border mb-2 cursor-pointer" onClick={()=>{onCreate({id, name, importance, description, status}); onClose()}}>Submit</button>
-            <button className=" text-xl cursor-pointer self-end absolute" onClick={onClose}><X strokeWidth={2.5} /></button>
+            <button 
+    className=" text-xl cursor-pointer self-end absolute cursor-pointer w-10 h-10 flex items-center justify-center p-1 rounded-full bg-transparent hover:bg-gray-700 transition-colors duration-300"
+    onClick={onClose}
+>
+    <X strokeWidth={2.5} className="text-gray-500 w-8 h-8" />
+</button>
         </div>
         
     </div>
