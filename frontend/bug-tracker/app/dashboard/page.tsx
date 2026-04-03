@@ -90,12 +90,14 @@ export default function Home() {
 
   // html starts here ///////////////////////////////////////////////////////////////////////////////////
   return (
-    <div className="flex flex-col items-center justify-center h-screen ">
-      <div className="w-95/100 mt-10">
+    <div className="flex flex-col h-screen bg-surface">
+      <div id="REAL-header" className="w-full bg-background flex justify-center mb-3">
+
+      <div id="parent-header"className="w-95/100 mt-10 mb-10 bg-background">
 
              <h1 className="self-start text-5xl font-bold">Bug Report Tracker</h1>
 
-      <div id="header"className="mb-5 flex flex-row justify-between w-full">
+      <div id="header"className="flex flex-row justify-between w-full">
       <div className="flex flex-col">
       <div id="searchbar" className="mt-auto rounded-md bg-surface border-1 flex flex-row items-center gap-3 px-3">
                   <Search className="w-7 h-7"></Search>
@@ -112,6 +114,10 @@ export default function Home() {
         </button>      
         </div>
       </div>
+
+
+      </div>
+
  
 
 

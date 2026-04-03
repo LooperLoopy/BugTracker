@@ -64,21 +64,25 @@ export default function Column({title, reports, onMove, onDelete, onEdit} : colu
     }
 
     return (
-    <div>
-      <div className="bg-surface text-center w-auto">
-      <h2>{title}</h2>
-      </div>
-      <p>Sort By: </p>
-            <select value={sortValue} onChange={e => changeSort(e.target.value as sortKey)} className="border p-2 w-full rounded">
-                <option className="text-black" value={sortKey.Name_AZ}>Name A-Z</option>
-                <option className="text-black" value={sortKey.Name_ZA}>Name Z-A</option>
-                <option className="text-black" value={sortKey.Priority_HIGH}>Highest Priority</option>
-                <option className="text-black" value={sortKey.Priority_LOW}>Lowest Priority</option>
-                <option className="text-black" value={sortKey.Date_RECENT}>Recent</option>
-                <option className="text-black" value={sortKey.Date_OLD}>Oldest</option>
+    <div className="bg-background">
+      <div id="column-header" className="gap-3 flex flex-row">
+          <div className="p-1 border text-center bg-surface">
+            <h2>{title}</h2>
+          </div>
+          <div className="p-1 border bg-surface">count</div>
+            <select value={sortValue} onChange={e => changeSort(e.target.value as sortKey)} className="border p-2 bg-surface text-white w-full rounded">
+                <option className="text-white" value={sortKey.Name_AZ}>Name A-Z</option>
+                <option className="text-white" value={sortKey.Name_ZA}>Name Z-A</option>
+                <option className="text-white" value={sortKey.Priority_HIGH}>Highest Priority</option>
+                <option className="text-white" value={sortKey.Priority_LOW}>Lowest Priority</option>
+                <option className="text-white" value={sortKey.Date_RECENT}>Recent</option>
+                <option className="text-white" value={sortKey.Date_OLD}>Oldest</option>
             </select>
+      </div>
 
-      <div className="mt-2 flex flex-col gap-3 overflow-y-auto max-h-[80vh]" style={{ width: 250 }}>
+
+
+      <div className="mt-2 flex flex-col gap-2 overflow-y-auto max-h-[80vh] p-2" style={{ width: 250 }}>
         {ref_reports.map((report) => (
           <ReportCard key ={report.id} report={report} onMove={onMove} onDelete={onDelete} onEdit={onEdit}/>
         ))}
