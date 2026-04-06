@@ -34,7 +34,7 @@ export default function ReportCard({report, onMove, onDelete, onEdit, colour}: R
                 </div>
                 </div>
 
-                <div className="w-100/100 line-clamp-2 break-words whitespace-pre-line mb-3">
+                <div className="w-100/100 line-clamp-2 break-words whitespace-pre-line mb-3 text-gray-400">
                     {report.description || "No Description"}
                 </div>
 
