@@ -106,11 +106,11 @@ export default function Home() {
       <div id="header"className="flex flex-row justify-between w-full">
       <div className="flex flex-col">
       <div id="searchbar" className="mt-auto rounded-md bg-surface border-1 flex flex-row items-center gap-3 px-3">
-                  <Search className="w-7 h-7"></Search>
-        <input value={searchText} onChange={(e)=>setSearchText(e.target.value)}id="search" className="max-w-40 text-xl py-2 outline-none bg-surface " type="text" placeholder="Search.."></input>
+                  <Search className="w-4 h-4"></Search>
+        <input value={searchText} onChange={(e)=>setSearchText(e.target.value)}id="search" className="max-w-40 text-sm py-2 outline-none bg-surface " type="text" placeholder="Search.."></input>
         <CircleX
           onClick={()=>setSearchText("")}
-          className={`cursor-pointer w-7 h-7 transition-all duration-200 ${
+          className={`cursor-pointer w-4 h-4 transition-all duration-200 ${
             searchText.trim() === ""
               ? "opacity-0 pointer-events-none"
               : "opacity-100"
@@ -119,8 +119,8 @@ export default function Home() {
           </div>
       </div>
 
-        <button className=" flex flex-row items-center gap-3 rounded-md border-1 bg-surface text-2xl cursor-pointer px-5 py-3" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report
-          <CirclePlus className="w-10 h-10"></CirclePlus>
+        <button className=" flex flex-row items-center gap-3 rounded-md border-1 bg-surface text-2xl cursor-pointer px-5 py-1" onClick={()=>toggleCreateForm(!showCreateForm)}>Create a Report
+          <CirclePlus className="w-9 h-9"></CirclePlus>
         </button>      
         </div>
       </div>

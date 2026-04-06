@@ -32,6 +32,7 @@ class ReportResponseList(BaseModel):
     description: str
     importance: int
     status: CompletionStatus
+    date_added: datetime
     class Config:
         from_attributes = True
     pass

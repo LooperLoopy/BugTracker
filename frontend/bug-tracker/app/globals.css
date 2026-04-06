@@ -2,14 +2,24 @@
 
 :root {
   --background: #2e2d32;
-  --foreground: #d3d3d3;
+  --foreground: #d9d9d9;
   --surface: #1f282f;
+  --border-color: #525252; 
+
   
 }
 @layer base {
   button {
     @apply transition duration-200 hover:brightness-80 cursor-pointer rounded-xs;
   }
+  option {
+    cursor: pointer;
+  }
+  * {
+    border-color: var(--border-color);
+  }
+  
+  
 }
 @theme inline {
   --color-background: var(--background);
