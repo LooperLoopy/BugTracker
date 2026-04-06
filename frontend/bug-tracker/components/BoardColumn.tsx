@@ -66,7 +66,7 @@ export default function Column({title, reports, onMove, onDelete, onEdit, colour
     }
 
     return (
-    <div className="bg-background h-98/100">
+    <div className="bg-background h-98/100 w-20/100 shrink-0">
       <div id="column-header" className="gap-3 flex flex-row items-start mt-3">
           <div className="p-1 border text-center bg-surface flex flex-row gap-2">
             <Circle style={{color: colour}}/>
@@ -86,7 +86,7 @@ export default function Column({title, reports, onMove, onDelete, onEdit, colour
 
 
 
-      <div className="flex flex-col overflow-y-auto max-h-[80vh] p-2 gap-2 bg-background mt-2" >
+      <div className="flex flex-col overflow-y-auto max-h-[calc(100vh-250px)] p-2 gap-2 bg-background mt-2" >
         {ref_reports.map((report) => (
           <ReportCard key ={report.id} report={report} onMove={onMove} onDelete={onDelete} onEdit={onEdit} colour={colour}/>
         ))}

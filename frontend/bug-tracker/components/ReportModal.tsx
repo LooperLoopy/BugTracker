@@ -24,22 +24,23 @@ export default function ReportModal({report, isOpen, onRequestClose, onEdit}: Re
             onClick={e => { e.stopPropagation(); onRequestClose(); }}
         >
             <div 
-                className="relative bg-surface rounded-lg p-6 flex flex-col w-70/100 overflow-y-auto max-h-[80vh]"
+                className="relative bg-surface rounded-lg p-6 flex flex-col w-70/100 max-h-[80vh]"
                 onClick={e => e.stopPropagation()}
             >
-                                <div className="text-4xl sticky bg-surface border-b pb-1 flex justify-between ">
-                <strong className="bottom-0">{`${report.name || "null"}`}</strong>
-<button 
-    className="cursor-pointer w-10 h-10 flex items-center justify-center p-1 rounded-full bg-transparent hover:bg-gray-700 transition-colors duration-300"
-    onClick={onRequestClose}
->
-    <X strokeWidth={2.5} className="text-gray-500 w-8 h-8" />
-</button>
+                <div className="text-4xl sticky bg-surface border-b pb-1 flex justify-between ">
+                    <strong className="bottom-0">{`${report.name || "null"}`}</strong>
+
+                    <button 
+                        className="cursor-pointer w-10 h-10 flex items-center justify-center p-1 rounded-full bg-transparent hover:bg-gray-700 transition-colors duration-300"
+                        onClick={onRequestClose}
+                    >
+                        <X strokeWidth={2.5} className="text-gray-500 w-8 h-8" />
+                    </button>
 
                 </div>  
 
                 <p >Description:</p>
-                <div className="max-h[20vh]">
+                <div className="max-h[20vh] overflow-y-auto break-words whitespace-pre-line">
                 <p className="">{`${report.description}`}</p>
                 
                 </div>

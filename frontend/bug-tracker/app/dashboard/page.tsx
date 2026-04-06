@@ -81,10 +81,16 @@ export default function Home() {
     fetchReports();
   }
 
-  const notStarted = reports.filter(r => r.status === "not_started");
-  const inProgress = reports.filter(r => r.status === "in_progress");
-  const testing = reports.filter(r => r.status === "testing");
-  const completed = reports.filter(r => r.status === "completed");
+  const filtered = reports.filter(r =>
+    r.name.toLowerCase().includes(searchText.toLowerCase())
+    // idk if we want it to go the description
+    // || r.description.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  const notStarted = filtered.filter(r => r.status === "not_started");
+  const inProgress = filtered.filter(r => r.status === "in_progress");
+  const testing = filtered.filter(r => r.status === "testing");
+  const completed = filtered.filter(r => r.status === "completed");
 
   const empty: ReportData = {name: "", description: ""};
 

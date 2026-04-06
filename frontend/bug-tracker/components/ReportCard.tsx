@@ -26,12 +26,16 @@ export default function ReportCard({report, onMove, onDelete, onEdit, colour}: R
             >
                 <button className="border m-2 cursor-pointer" onClick={()=>onDelete(report.id)}>delete</button>
             </div>**/}
-                <div className="flex flex-row justify-between mb-3">
-                <strong>{`${report.name || "null"}`}</strong>
+                <div className="flex flex-row justify-between mb-3 w-full">
+                <strong className="truncate min-w-0">{`${report.name || "null"}`}</strong>
                 <div className="bg-red-500/20 w-fit px-2 py-[2px] h-fit flex items-center justify-center">
                 <p className="text-[0.65rem] text-red-300/50">{`P${report.importance}`}</p>
 
                 </div>
+                </div>
+
+                <div className="w-100/100 line-clamp-2 break-words whitespace-pre-line mb-3">
+                    {report.description || "No Description"}
                 </div>
 
             <div className="flex flex-row justify-between">
