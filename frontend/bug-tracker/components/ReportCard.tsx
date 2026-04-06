@@ -54,7 +54,7 @@ export default function ReportCard({report, onMove, onDelete, onEdit, colour}: R
             </div>
 <DropdownMenu.Root>
   <DropdownMenu.Trigger asChild onClick={e => e.stopPropagation()}>
-    <div className="bg-gray-500/50 absolute bottom-[6px] rounded-sm right-[6px] cursor-pointer">
+    <div className="bg-gray-500/20 absolute bottom-[6px] rounded-sm right-[6px] cursor-pointer">
       <Ellipsis className="w-7 h-4" />
     </div>
   </DropdownMenu.Trigger>

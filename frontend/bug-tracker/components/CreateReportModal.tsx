@@ -25,10 +25,10 @@ export default function CreateReportModal({header, intialData, onClose, onCreate
             >            
                 <h1 className="text-3xl">{header}</h1>
                 <p>Name:</p>
-                <input className="border" type="text" value={name} placeholder={intialData.name} onChange={(e) => setName(e.target.value)}/>
+                <input className="rounded p-3 border" type="text" value={name} placeholder={intialData.name} onChange={(e) => setName(e.target.value)}/>
                 <p>Description:</p>
                 <textarea
-                    className="border resize-y h-32 min-h-24"
+                    className="rounded p-3 border resize-y h-32 min-h-24"
                     name="text"
                     rows={6}
                     value={description}
@@ -49,7 +49,7 @@ export default function CreateReportModal({header, intialData, onClose, onCreate
                     <option className="text-black" value="testing">Testing</option>
                     <option className="text-black" value="completed">Completed</option>
                 </select>            
-                <button className="text-xl border mb-2 cursor-pointer" onClick={() => { onCreate({id, name, importance, description, status}); onClose(); }}>Submit</button>
+                <button className="py-1 bg-green-500/50 text-xl border mb-2 cursor-pointer" onClick={() => { onCreate({id, name, importance, description, status}); onClose(); }}>Submit</button>
                 <button 
                     className="text-xl cursor-pointer self-end absolute top-4 right-4 w-10 h-10 flex items-center justify-center p-1 rounded-full bg-transparent hover:bg-gray-700 transition-colors duration-300"
                     onClick={onClose}

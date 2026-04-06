@@ -6,7 +6,11 @@
   --surface: #1f282f;
   
 }
-
+@layer base {
+  button {
+    @apply transition duration-200 hover:brightness-80 cursor-pointer rounded-xs;
+  }
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

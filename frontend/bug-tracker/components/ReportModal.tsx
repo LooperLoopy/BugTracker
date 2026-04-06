@@ -3,7 +3,7 @@
 import { Report, ReportData } from "@/lib/types"
 import { useState } from "react"
 import CreateReportModal from "./CreateReportModal"
-import {X, Pencil} from "lucide-react"
+import {X, Pencil, Check} from "lucide-react"
 
 type ReportModalProps = {
     report: Report
@@ -48,14 +48,25 @@ export default function ReportModal({report, isOpen, onRequestClose, onEdit}: Re
                 {isEditing ? (
                 <textarea className="w-full bg-surface border rounded p-2 outline-none resize-none" rows={5} value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
                 ) : (
-                <p className="p-2 w-full">{report.description}</p>
+                <p className="w-full">{report.description}</p>
                 )}
                 </div>
                 
                 {isEditing? (
                     <div className="flex gap-2 self-end m-2">
-                        <button className="border px-2 py-1 cursor-pointer"onClick={() => toggleEditMode(false)}>Cancel</button>
-                        <button className="bg-green-500/50 border px-2 py-1 cursor-pointer"onClick={() => { onEdit({...form, id: report.id}); toggleEditMode(false); onRequestClose(); }}>Save</button>
+                        <button className="hover:brightness-80 duration-200 gap-0.5 flex flex-row items-center border px-2 py-1 cursor-pointer"
+                        onClick={() => 
+                        {toggleEditMode(false);
+                         setForm({name: report.name, description: report.description, importance: report.importance, status: report.status});
+                        }}
+                         >
+                            <X className="w-5 h-5"></X>
+                            Cancel
+                            </button>
+                        <button className="gap-1 flex flex-row items-center bg-green-500/50 border px-2 py-1 cursor-pointer hover:brightness-90 duration-200"onClick={() => { onEdit({...form, id: report.id}); toggleEditMode(false); onRequestClose(); }}>
+                        <Check className="w-4.5 h-4.5"></Check>
+                        Save
+                        </button>
                     </div>
 
                 ): (

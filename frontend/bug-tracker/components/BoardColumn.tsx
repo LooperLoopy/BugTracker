@@ -68,9 +68,9 @@ export default function Column({title, reports, onMove, onDelete, onEdit, colour
     return (
     <div className="bg-background h-98/100 w-20/100 shrink-0">
       <div id="column-header" className="gap-3 flex flex-row items-start mt-3">
-          <div className="p-1 border text-center bg-surface flex flex-row gap-2">
+          <div className="py-1 px-2 border text-center bg-surface flex flex-row gap-2">
             <Circle style={{color: colour}}/>
-            <h2>{title}</h2>
+            <h2 className="text-sm">{title}</h2>
 
           </div>
           <div className="p-1 border bg-surface text-[0.6rem]">{reports.length}</div>

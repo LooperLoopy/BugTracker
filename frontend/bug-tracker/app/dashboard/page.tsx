@@ -108,10 +108,14 @@ export default function Home() {
       <div id="searchbar" className="mt-auto rounded-md bg-surface border-1 flex flex-row items-center gap-3 px-3">
                   <Search className="w-7 h-7"></Search>
         <input value={searchText} onChange={(e)=>setSearchText(e.target.value)}id="search" className="max-w-40 text-xl py-2 outline-none bg-surface " type="text" placeholder="Search.."></input>
-          <CircleX
-            className={`${searchText.trim() === "" ? "invisible" : ""}`}
-            onClick={(e)=>setSearchText("")}
-          />      
+        <CircleX
+          onClick={()=>setSearchText("")}
+          className={`cursor-pointer w-7 h-7 transition-all duration-200 ${
+            searchText.trim() === ""
+              ? "opacity-0 pointer-events-none"
+              : "opacity-100"
+          }`}
+        />
           </div>
       </div>
 
