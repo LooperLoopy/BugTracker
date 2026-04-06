@@ -29,11 +29,10 @@ export default function ReportModal({report, isOpen, onRequestClose, onEdit}: Re
                 onClick={e => e.stopPropagation()}
             >
                 <div className="text-4xl sticky bg-surface border-b pb-1 flex justify-between gap-4">
-                    <strong className="bottom-0">{`${report.name || "null"}`}</strong>
                     {isEditing ? (
                     <input className="border rounded p-2 text-4xl font-bold bg-surface outline-none w-full" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
                     ) : (
-                    <strong>{report.name}</strong>
+                    <strong className="break-all mine-w-0">{report.name}</strong>
                     )}
                     <button 
                         className="cursor-pointer w-10 h-10 shrink-0 flex items-center justify-center p-1 rounded-full bg-transparent hover:bg-gray-700 transition-colors duration-300"
