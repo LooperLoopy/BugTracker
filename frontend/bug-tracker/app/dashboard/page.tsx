@@ -70,7 +70,7 @@ export default function Home() {
   }
 
   async function handleDelete(id: number){
-    deleteReport(id)
+    await deleteReport(id)
 
     fetchReports();
   }

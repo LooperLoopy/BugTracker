@@ -1,7 +1,9 @@
 import { Report, ReportData } from "@/lib/types"
 import ReportModal from "@/components/ReportModal";
 import { useState } from "react";
-import {Ellipsis} from "lucide-react";
+import {Ellipsis, Pencil, Trash2} from "lucide-react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
 type ReportCardProps = {
 
     report: Report
@@ -12,7 +14,6 @@ type ReportCardProps = {
 }
 export default function ReportCard({report, onMove, onDelete, onEdit, colour}: ReportCardProps){
     const[showReport, toggleReportView] = useState(false);
-    const [showElipsisMenu, toggleElipsisMenu] = useState(false);
     return(
         <div 
             style={{ borderTopColor: colour }}
@@ -51,11 +52,37 @@ export default function ReportCard({report, onMove, onDelete, onEdit, colour}: R
                     <option value="completed">Completed</option>
                 </select>
             </div>
-            <div className="bg-gray-500/50 absolute bottom-[6px] rounded-sm right-[6px] cursor-pointer">
-                <Ellipsis className="w-7 h-4"/>
+<DropdownMenu.Root>
+  <DropdownMenu.Trigger asChild onClick={e => e.stopPropagation()}>
+    <div className="bg-gray-500/50 absolute bottom-[6px] rounded-sm right-[6px] cursor-pointer">
+      <Ellipsis className="w-7 h-4" />
+    </div>
+  </DropdownMenu.Trigger>
 
-
-            </div>
+  <DropdownMenu.Portal>
+    <DropdownMenu.Content
+      className="bg-white rounded shadow-lg w-36 py-1 z-50"
+      side="right"
+      align="start"
+      onClick={e => e.stopPropagation()}
+    >
+      <DropdownMenu.Item
+        className="px-3 py-2 flex flex-row gap-3 text-red-500 items-center text-sm text-gray-700 hover:bg-gray-100 cursor-pointer outline-none"
+        onClick={() => onDelete(report.id)}
+      >
+        <Trash2 className="w-5 h-5"/>
+        Delete
+      </DropdownMenu.Item>
+      <DropdownMenu.Item
+        className="flex flex-row gap-3 items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer outline-none"
+        onClick={()=>toggleReportView(true)}
+      >
+        <Pencil className="w-5 h-5"/>
+        Edit
+      </DropdownMenu.Item>
+    </DropdownMenu.Content>
+  </DropdownMenu.Portal>
+</DropdownMenu.Root>
             </div>
 
             

@@ -3,7 +3,7 @@
 import { Report, ReportData } from "@/lib/types"
 import { useState } from "react"
 import CreateReportModal from "./CreateReportModal"
-import {X} from "lucide-react"
+import {X, Pencil} from "lucide-react"
 
 type ReportModalProps = {
     report: Report
@@ -15,8 +15,9 @@ type ReportModalProps = {
 export default function ReportModal({report, isOpen, onRequestClose, onEdit}: ReportModalProps){
     if (!isOpen) return null;
     const[showEditForm, toggleEditForm] = useState(false);
-
+    const[isEditing, toggleEditMode] = useState(false);
     const initial: ReportData = {id: report.id, name: report.name, description: report.description, importance: report.importance, status: report.status};
+    const [form, setForm] = useState({ name: report.name, description: report.description, importance: report.importance, status: report.status });
 
     return (
         <div 
@@ -28,8 +29,12 @@ export default function ReportModal({report, isOpen, onRequestClose, onEdit}: Re
                 onClick={e => e.stopPropagation()}
             >
                 <div className="text-4xl sticky bg-surface border-b pb-1 flex justify-between gap-4">
-                    <strong className="break-all mine-w-0">{`${report.name || "null"}`}</strong>
-
+                    <strong className="bottom-0">{`${report.name || "null"}`}</strong>
+                    {isEditing ? (
+                    <input className="border rounded p-2 text-4xl font-bold bg-surface outline-none w-full" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
+                    ) : (
+                    <strong>{report.name}</strong>
+                    )}
                     <button 
                         className="cursor-pointer w-10 h-10 shrink-0 flex items-center justify-center p-1 rounded-full bg-transparent hover:bg-gray-700 transition-colors duration-300"
                         onClick={onRequestClose}
@@ -38,19 +43,31 @@ export default function ReportModal({report, isOpen, onRequestClose, onEdit}: Re
                     </button>
 
                 </div>  
-
+                
                 <p >Description:</p>
                 <div className="max-h[20vh] overflow-y-auto break-words whitespace-pre-line">
-                <p className="">{`${report.description}`}</p>
-                
+                {isEditing ? (
+                <textarea className="w-full bg-surface border rounded p-2 outline-none resize-none" rows={5} value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
+                ) : (
+                <p className="p-2 w-full">{report.description}</p>
+                )}
                 </div>
                 
+                {isEditing? (
+                    <div className="flex gap-2 self-end m-2">
+                        <button className="border px-2 py-1 cursor-pointer"onClick={() => toggleEditMode(false)}>Cancel</button>
+                        <button className="bg-green-500/50 border px-2 py-1 cursor-pointer"onClick={() => { onEdit({...form, id: report.id}); toggleEditMode(false); onRequestClose(); }}>Save</button>
+                    </div>
+
+                ): (
                 <button 
-                    className="border self-end m-2 cursor-pointer"
-                    onClick={()=>toggleEditForm(!showEditForm)}
+                    className="flex flex-row gap-2 items-center border self-end m-2 cursor-pointer px-2 py-1"
+                    onClick={()=>toggleEditMode(!isEditing)}
                 >
+                    <Pencil className="w-4 h-4 "/>
                     Edit
                 </button>
+                )}
                 {showEditForm && <CreateReportModal header="Edit Report" intialData={initial} onClose={()=>toggleEditForm(false)} onCreate={onEdit}/>}
 
             </div>
